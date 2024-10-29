@@ -14,6 +14,17 @@ Duplicar o arquivo ".env.example" e renomear para ".env".<br>
 
 * Acessar o conteúdo padrão: http://127.0.0.1:8000
 
+## Como usar o GitHub
+* Baixar os arquivos do Git
+git clone --branch <branch_name> <repository_url> . (acrescentar o '.' no final para clonar na pasta existente)
+
+* Verificar a branch
+git branch
+
+* Baixr as atualizações
+git pull
+
+
 
 
  

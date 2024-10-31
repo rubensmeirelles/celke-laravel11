@@ -33,6 +33,16 @@ http://127.0.0.1:8000
 ```
 
 ## Sequencia para criar o projeto
+* Criar o controller
+php artisan make:controller CourseController
+```
+
+* Criar a view
+php artisan make:view nome-da-view
+```
+
+
+
 Criar o projeto com Laravel
 ```
 composer create-project laravel/laravel .

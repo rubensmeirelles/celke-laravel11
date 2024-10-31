@@ -3,7 +3,6 @@
 @section('content')
     <h2>Listar os cursos</h2>
 
-    <a href="{{ route('courses.show') }}">Visualizar</a>
     <a href="{{ route('courses.create') }}">Cadastrar</a>
 
     <table>
@@ -17,6 +16,7 @@
         {{ $course->name }}<br>
         {{ \Carbon\carbon::parse($course->created_at)->format('d/m/y H:i:s') }}<br>
         {{ \Carbon\carbon::parse($course->updated_at)->format('d/m/y H:i:s') }}<br>
+        <a href="{{ route('courses.show', ['course' => $course->id]) }}">Visualizar</a>
 
         <hr>
     @empty

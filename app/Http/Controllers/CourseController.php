@@ -20,9 +20,15 @@ class CourseController extends Controller
     }
 
     // Visualizar os cursos
-    public function show(){
+    public function show(Course $course){
+
+        // dd($request->course);
+
+        //$course = Course::where( 'id', $request->course)->first();
+        // dd($course);
+
         // CARREGAR A VIEW
-        return view('courses.show');
+        return view('courses.show', ['course' => $course]);
     }
 
     // Criar os cursos

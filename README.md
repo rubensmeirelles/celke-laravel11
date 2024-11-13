@@ -41,8 +41,6 @@ php artisan make:controller CourseController
 php artisan make:view nome-da-view
 ```
 
-
-
 Criar o projeto com Laravel
 ```
 composer create-project laravel/laravel .
@@ -66,6 +64,18 @@ php artisan make:migration create_name_table
 Executar as migration
 ```
 php artisan migrate
+```
+
+Criar a model
+php artisan make:model Course
+```
+
+Criar o seeder
+php artisan make:seeder CourseSeeder
+```
+
+Executar a sees
+php artisan db:seed
 ```
 
 ## Como usar o GitHub

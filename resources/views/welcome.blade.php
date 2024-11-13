@@ -9,5 +9,6 @@
     <body>
         <h1>Laravel 11</h1>
         <p>Hoje é dia {{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}</p>
+        <a href="{{ route('courses.index') }}">Listar</a>
     </body>
 </html>

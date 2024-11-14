@@ -63,8 +63,10 @@ class CourseController extends Controller
     }
 
     // Editar o curso
-    public function destroy(){
-        dd('Excluir');
+    public function destroy(Course $course){
+
+        $course->delete();
+        return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso excluído com sucesso!');
     }
 
 

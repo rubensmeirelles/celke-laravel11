@@ -5,6 +5,11 @@
 
     <a href="{{ route('courses.index') }}">Listar</a>
     <a href="{{ route('courses.show', ['course' => $course->id]) }}">Visualizar</a>
+    <form action="{{ route('courses.destroy', ['course' => $course->id]) }}" method="POST">
+        @csrf
+        @method('delete')
+        <button type="submit" onclick="return confirm('Coonfirma a exclusão do registro?')">Apagar</button>
+    </form>
 
     {{-- {{ dd($course) }} --}}
 

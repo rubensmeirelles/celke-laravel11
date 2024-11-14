@@ -5,6 +5,12 @@
 
     <a href="{{ route('courses.create') }}">Cadastrar</a>
 
+    @if (session('success'))
+        <p style="color: #082">
+            {{ session('success') }}
+        </p>
+    @endif
+
     <table>
         <tr>
             <thead></thead>
@@ -17,6 +23,7 @@
         {{ \Carbon\carbon::parse($course->created_at)->format('d/m/y H:i:s') }}<br>
         {{ \Carbon\carbon::parse($course->updated_at)->format('d/m/y H:i:s') }}<br>
         <a href="{{ route('courses.show', ['course' => $course->id]) }}">Visualizar</a>
+        <a href="{{ route('courses.edit', ['course' => $course->id]) }}">Editar</a>
 
         <hr>
     @empty

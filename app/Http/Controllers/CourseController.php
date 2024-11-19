@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
-use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -29,7 +28,7 @@ class CourseController extends Controller
         // dd($course);
 
         // CARREGAR A VIEW
-        return view('courses.show', ['course' => $course]);
+        return view('course.show', ['course' => $course]);
     }
 
     // Criar os cursos

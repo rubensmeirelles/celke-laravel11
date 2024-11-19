@@ -20,6 +20,7 @@ class ClassSeeder extends Seeder
                 Sit maiores perferendis, sed nulla recusandae fuga officiis!
                 Perferendis, dolorem a consectetur facilis laudantium laboriosam harum nesciunt mollitia ab non,
                 voluptatum minima!',
+                'order_class' => 1,
                 'course_id' => 2
             ]);
         }
@@ -29,6 +30,7 @@ class ClassSeeder extends Seeder
                 'name' => 'Aula 3',
                 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Sit maiores perferendis, sed nulla recusandae fuga officiis!',
+                'order_class' => 1,
                 'course_id' => 2
             ]);
         }

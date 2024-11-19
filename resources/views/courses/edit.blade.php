@@ -13,16 +13,24 @@
 
     {{-- {{ dd($course) }} --}}
 
+    @if ($errors->any())
+        <span style="color: #f00">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </span>
+    @endif
+
     <form action="{{ route('courses.update', ['course' => $course->id]) }}" method="POST">
         @csrf
         @method('PUT')
 
         <label for="">Nome: </label>
         <input type="text" name="name" id="name" placeholder="Nome do curso" value="{{ old('name', $course->name) }}"
-            required> <br><br>
+            > <br><br>
         <label for="">Preço: </label>
         <input type="text" name="price" id="price" placeholder="price do curso: 0.00" value="{{ old('price', $course->price) }}"
-        required> <br><br>
+        > <br><br>
         <button type="submit">Salvar</button>
 
     </form>

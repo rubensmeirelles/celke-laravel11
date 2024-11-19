@@ -13,6 +13,7 @@
 
     Id: {{ $course->id }}<br>
     Nome: {{ $course->name }}<br>
+    Preço: {{ 'R$ ' . number_format($course->price, 2, ',' , '.') }}<br>
     Cadastrado em: {{ \Carbon\carbon::parse($course->created_at)->format('d/m/y H:i:s') }}<br>
     Editado em: {{ \Carbon\carbon::parse($course->updated_at)->format('d/m/y H:i:s') }}<br>
 @endsection

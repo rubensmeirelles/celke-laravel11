@@ -19,7 +19,10 @@
 
         <label for="">Nome: </label>
         <input type="text" name="name" id="name" placeholder="Nome do curso" value="{{ old('name', $course->name) }}"
-            required>
+            required> <br><br>
+        <label for="">Preço: </label>
+        <input type="text" name="price" id="price" placeholder="price do curso: 0.00" value="{{ old('price', $course->price) }}"
+        required> <br><br>
         <button type="submit">Salvar</button>
 
     </form>

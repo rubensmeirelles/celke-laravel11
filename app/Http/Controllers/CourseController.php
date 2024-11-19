@@ -40,7 +40,8 @@ class CourseController extends Controller
     // Cadastrar os cursos no banco de dados
     public function store(Request $request){
         $course = Course::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'price' => $request->price,
         ]);
 
         return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso cadastrado com sucesso');
@@ -57,7 +58,8 @@ class CourseController extends Controller
     // Editar o registro no banco de dados
     public function update(Request $request, Course $course){
         $course->update([
-            'name'=>$request->name
+            'name'=>$request->name,
+            'price'=>$request->price,
     ]);
         return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso editado com sucesso!');
     }

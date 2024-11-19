@@ -16,7 +16,9 @@
         @method('POST')
 
         <label for="name">Nome:</label>
-        <input type="text" name="name" id="name" placeholder="Nome do curso" value="{{ old('name') }}" required>
+        <input type="text" name="name" id="name" placeholder="Nome do curso" value="{{ old('name') }}" required><br><br>
+        <label for="name">Preço:</label>
+        <input type="text" name="price" id="price" placeholder="price do curso: 0.00" value="{{ old('price') }}" required><br><br>
         <button type="submit">Cadastrar</button>
     </form>
 @endsection

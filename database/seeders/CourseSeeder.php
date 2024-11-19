@@ -16,18 +16,21 @@ class CourseSeeder extends Seeder
         if(!Course::where('name', 'Curso de Laravel - T1')->first()){
             Course::create([
                 'name' => 'Curso de Laravel - T1',
+                'price' => '197.43',
             ]);
         }
 
         if(!Course::where('name', 'Curso de Laravel - T2')->first()){
             Course::create([
                 'name' => 'Curso de Laravel - T2',
+                'price' => '247.43',
             ]);
         }
 
         if(!Course::where('name', 'Curso de Laravel - T3')->first()){
             Course::create([
                 'name' => 'Curso de Laravel - T3',
+                'price' => '287.43',
             ]);
         }
 

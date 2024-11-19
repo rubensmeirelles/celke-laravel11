@@ -5,11 +5,7 @@
 
     <a href="{{ route('courses.create') }}">Cadastrar</a>
 
-    @if (session('success'))
-        <p style="color: #082">
-            {{ session('success') }}
-        </p>
-    @endif
+<x-alert />
 
     <table>
         <tr>

@@ -13,13 +13,7 @@
 
     {{-- {{ dd($course) }} --}}
 
-    @if ($errors->any())
-        <span style="color: #f00">
-            @foreach ($errors->all() as $error)
-                {{ $error }}<br>
-            @endforeach
-        </span>
-    @endif
+    <x-alert />
 
     <form action="{{ route('courses.update', ['course' => $course->id]) }}" method="POST">
         @csrf

@@ -5,6 +5,9 @@
 
     <a href="{{ route('courses.index') }}">Listar</a><br>
     <a href="{{ route('courses.edit', ['course' => $course->id]) }}">Editar</a><br><br>
+
+    <x-alert />
+
     <form action="{{ route('courses.destroy', ['course' => $course->id]) }}" method="POST">
         @csrf
         @method('delete')

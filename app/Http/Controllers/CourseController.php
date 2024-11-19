@@ -42,7 +42,7 @@ class CourseController extends Controller
     public function store(CourseRequest $request){
 
         //Validar o formulário
-        $request->validate();
+        $request->validated();
 
         $course = Course::create([
             'name' => $request->name,
@@ -64,7 +64,7 @@ class CourseController extends Controller
     public function update(CourseRequest $request, Course $course){
 
         //Validar o formulário
-        $request->validate();
+        $request->validated();
 
         $course->update([
             'name'=>$request->name,
@@ -73,7 +73,7 @@ class CourseController extends Controller
         return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso editado com sucesso!');
     }
 
-    // Editar o curso
+    // Deletar o curso
     public function destroy(Course $course){
 
         $course->delete();

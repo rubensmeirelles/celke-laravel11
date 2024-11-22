@@ -74,7 +74,7 @@ Criar o seeder
 php artisan make:seeder CourseSeeder
 ```
 
-Executar a sees
+Executar a seed
 php artisan db:seed
 ```
 

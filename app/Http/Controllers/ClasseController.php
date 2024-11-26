@@ -46,4 +46,27 @@ class ClasseController extends Controller
         // Redirecionar o usuário
         return redirect()->route('classe.index', ['course' => $request->course_id])->with('success', 'Aula cadastrada com sucesso!');
     }
+
+    public function edit(Classe $classe){
+        return view('classes.edit', ['classe' => $classe]);
+    }
+
+    public function update(ClasseRequest $request, Classe $classe){
+        $request->validated();
+
+        $classe->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+        return redirect()->route('classe.index', ['course' => $classe->course_id])->with('success', 'Aula editada com suceso!');
+    }
+
+    public function show(Classe $classe){
+        return view('classes.show', ['classe' => $classe]);
+    }
+
+    public function destroy(Classe $classe){
+        $classe->delete();
+        return redirect()->route('classe.index', ['course' => $classe->course_id])->with('success', 'Aula excluída com suceso!');
+    }
 }

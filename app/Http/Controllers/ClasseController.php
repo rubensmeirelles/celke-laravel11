@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClasseRequest;
 use App\Models\Classe;
 use App\Models\Course;
+use Exception;
 use Illuminate\Http\Request;
 
 class ClasseController extends Controller
@@ -66,7 +67,12 @@ class ClasseController extends Controller
     }
 
     public function destroy(Classe $classe){
-        $classe->delete();
-        return redirect()->route('classe.index', ['course' => $classe->course_id])->with('success', 'Aula excluída com suceso!');
+        try{
+            $classe->delete();
+            return redirect()->route('classe.index', ['course' => $classe->course_id])->with('success', 'Aula excluída com suceso!');
+        } catch(Exception $e){
+            return redirect()->route('classe.index', ['course' => $classe->course_id])->with('error', 'Aula não excluída!');
+        }
+
     }
 }

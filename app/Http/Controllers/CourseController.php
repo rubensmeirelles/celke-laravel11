@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
+use Exception;
 
 class CourseController extends Controller
 {
@@ -74,9 +75,13 @@ class CourseController extends Controller
 
     // Deletar o curso
     public function destroy(Course $course){
+        try{
+            $course->delete();
+            return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso excluído com sucesso!');
+        } catch(Exception $e){
+            return redirect()->route('courses.index', ['course' => $course->id])->with('error', 'Curso não excluído!');
+        }
 
-        $course->delete();
-        return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso excluído com sucesso!');
     }
 
 

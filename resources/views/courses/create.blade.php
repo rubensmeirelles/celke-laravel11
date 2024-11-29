@@ -1,22 +1,56 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2>Cadastrar curso</h2>
+<div class="container-fluid px-4">
 
-    <a href="{{ route('courses.index') }} ">
-        <button>Listar</button>
-    </a><br><br>
+    <div class="mb-1 hstack gap-2">
+        <h2 class="mt-3">Curso</h2>
+        <ol class="breadcrumb mb-3 mt-3 ms-auto">
+            <li class="breadcrumb-item active">
+                <a href="" class="text-decoration-none">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a href="{{ route('courses.index') }}" class="text-decoration-none">Cursos</a>
+            </li>
+            <li class="breadcrumb-item">Curso</li>
+        </ol>
+    </div>
 
-    <x-alert />
+    <div class="card mb-4 hstack gap-2">
+        <span class="card-header">Cadastrar</span>
+        <span class="ms-auto">
+            <a href="{{ route('courses.index') }}" class="btn btn-secondary btn-sm">Listar</a>
+        </span>
+    </div>
 
-    <form action="{{ route('courses.store') }}" method="POST">
-        @csrf
-        @method('POST')
+    <div class="card-body">
+        <x-alert />
 
-        <label for="name">Nome:</label>
-        <input type="text" name="name" id="name" placeholder="Nome do curso" value="{{ old('name') }}"><br><br>
-        <label for="price">Preço:</label>
-        <input type="text" name="price" id="price" placeholder="price do curso: 0.00" value="{{ old('price') }}"><br><br>
-        <button type="submit">Cadastrar</button>
-    </form>
+        <form class="row g-3" action="{{ route('courses.store') }}" method="POST">
+            @csrf
+            @method('POST')
+
+            <div class="col-12 col-md-6">
+                <label for="name" class="form-label">Nome</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Nome do curso" value="{{ old('name') }}">
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="price" class="form-label">Preço</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Preço do curso: 0.00" value="{{ old('price') }}">
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-success btn-sm">Cadastrar</button>
+              </div>
+
+        </form>
+
+
+    </div>
+
+</div>
+    {{-- Exibir a paginaçã --}}
+    {{-- {{ $courses->links() }} --}}
 @endsection
+
+

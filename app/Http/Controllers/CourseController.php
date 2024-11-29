@@ -6,6 +6,7 @@ use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
@@ -15,7 +16,10 @@ class CourseController extends Controller
         // $courses = Course::where('id', 1000)->get();
         // $courses = Course::paginate(2);
         // $courses = Course::orderBy('id','DESC')->get();
-        $courses = Course::get();
+        $courses = Course::orderBy('name', 'ASC')->get();
+
+        //Salvar log
+        Log::info('Listar cursos.');
 
         // CARREGAR A VIEW
         return view('courses.index', ['courses' => $courses]);
@@ -29,8 +33,10 @@ class CourseController extends Controller
         //$course = Course::where( 'id', $request->course)->first();
         // dd($course);
 
+        Log::info('Visualizar cursos', ['course_id' => $course->id]);
+
         // CARREGAR A VIEW
-        return view('course.show', ['course' => $course]);
+        return view('courses.show', ['course' => $course]);
     }
 
     // Criar os cursos
@@ -56,9 +62,13 @@ class CourseController extends Controller
 
         DB::commit();
 
+        Log::info('Curso não cadastrado', ['course_id' => $course->id]);
+
         return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso cadastrado com sucesso');
         } catch(Exception $e){
             DB::rollback();
+
+            Log::warning('Curso não cadastrado', ['error' => $e->getMessage()]);
 
             return back()->withInput()->with('error', 'Curso não cadastrado!');
         }

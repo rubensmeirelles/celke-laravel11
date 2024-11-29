@@ -30,6 +30,9 @@
             <dt class="col-sm-3">Nome</dt>
             <dd class="col-sm-9">{{ $classe->name }}</dd>
 
+            <dt class="col-sm-3">Descrição</dt>
+            <dd class="col-sm-9">{{ $classe->description }}</dd>
+
             <dt class="col-sm-3">Cadastrado em:</dt>
             <dd class="col-sm-9">{{ \Carbon\carbon::parse($classe->created_at)->format('d/m/y H:i:s') }}</dd>
 

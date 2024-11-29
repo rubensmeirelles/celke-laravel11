@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -44,12 +45,23 @@ class CourseController extends Controller
         //Validar o formulário
         $request->validated();
 
+        DB::beginTransaction();
+
+        try{
+
         $course = Course::create([
             'name' => $request->name,
             'price' => $request->price,
         ]);
 
+        DB::commit();
+
         return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso cadastrado com sucesso');
+        } catch(Exception $e){
+            DB::rollback();
+
+            return back()->withInput()->with('error', 'Curso não cadastrado!');
+        }
     }
 
     // Editar o curso
@@ -66,11 +78,24 @@ class CourseController extends Controller
         //Validar o formulário
         $request->validated();
 
-        $course->update([
-            'name'=>$request->name,
-            'price'=>$request->price,
-    ]);
-        return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso editado com sucesso!');
+        DB::beginTransaction();
+
+        try{
+            $course->update([
+                'name'=>$request->name,
+                'price'=>$request->price,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('courses.index', ['course' => $course->id])->with('success', 'Curso editado com sucesso!');
+        }
+
+        catch(Exception $e){
+            DB::rollback();
+
+            return back()->withInput()->with('error', 'Curso não editado!');
+        }
     }
 
     // Deletar o curso

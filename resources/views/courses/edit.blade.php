@@ -3,8 +3,8 @@
 @section('content')
     <h2>Editar curso</h2>
 
-    <a href="{{ route('courses.index') }}">Listar</a>
-    <a href="{{ route('courses.show', ['course' => $course->id]) }}">Visualizar</a>
+    <a href="{{ route('courses.index') }}"><button>Listar</button></a>
+    <a href="{{ route('courses.show', ['course' => $course->id]) }}"><button>Visualizar</button></a>
     <form action="{{ route('courses.destroy', ['course' => $course->id]) }}" method="POST">
         @csrf
         @method('delete')

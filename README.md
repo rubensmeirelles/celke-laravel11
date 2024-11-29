@@ -93,3 +93,16 @@ Baixar as atualizações
 ```
 git pull
 ```
+
+Instalar o pacote de Auditoria do Laravel
+composer require owen-it/laravel-auditing
+````
+
+Publicar a configuração e as migration para auditoria
+php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="config"
+````
+php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="migrations"
+
+Limpar cache de configuração
+php artisan config:clear
+````

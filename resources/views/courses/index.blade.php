@@ -58,9 +58,10 @@
                 @endforelse
             </tbody>
         </table>
+        {{-- Exibir a paginaçã --}}
+    {{ $courses->links() }}
     </div>
 </div>
-    {{-- Exibir a paginaçã --}}
-    {{-- {{ $courses->links() }} --}}
+
 @endsection
 

@@ -16,7 +16,8 @@ class CourseController extends Controller
         //$courses = Course::where('id', 1000)->get();
         // $courses = Course::paginate(2);
         // $courses = Course::orderBy('id','DESC')->get();
-        $courses = Course::orderBy('name', 'ASC')->get();
+        $courses = Course::orderBy('name', 'ASC')
+        ->paginate(10);
 
         //Salvar log
         Log::info('Listar cursos.');

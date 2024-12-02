@@ -4,105 +4,16 @@
 * Composer
 
 ## Como rodar o projeto baixado
-
 Duplicar o arquivo ".env.example" e renomear para ".env".<br>
 
-Instalar as dependências do PHP
-```
-composer install
-```
+* Instalar as dependências do PHP com Composer install
 
-Gerar a chave
-```
-php artisan key:generate
-```
+* Gerar a chave com o comando php artisan key:generate
 
-Executar as migration
-```
-php artisan migrate
-```
+* Iniciar o projeto criado com Laravel com o comando php artisan serve
 
-Iniciar o projeto criado com Laravel
-```
-php artisan serve
-```
+* Acessar o conteúdo padrão: http://127.0.0.1:8000
 
-Acessar o conteúdo padrão do Laravel
-```
-http://127.0.0.1:8000
-```
 
-## Sequencia para criar o projeto
-* Criar o controller
-php artisan make:controller CourseController
-```
 
-* Criar a view
-php artisan make:view nome-da-view
-```
-
-Criar o projeto com Laravel
-```
-composer create-project laravel/laravel .
-```
-
-Iniciar o projeto criado com Laravel
-```
-php artisan serve
-```
-
-Acessar o conteúdo padrão do Laravel
-```
-http://127.0.0.1:8000
-```
-
-Criar a migration
-```
-php artisan make:migration create_name_table
-```
-
-Executar as migration
-```
-php artisan migrate
-```
-
-Criar a model
-php artisan make:model Course
-```
-
-Criar o seeder
-php artisan make:seeder CourseSeeder
-```
-
-Executar a seed
-php artisan db:seed
-```
-
-## Como usar o GitHub
-Baixar os arquivos do Git
-```
-git clone --branch <branch_name> <repository_url> .
-```
-
-Verificar a branch
-```
-git branch 
-```
-
-Baixar as atualizações
-```
-git pull
-```
-
-Instalar o pacote de Auditoria do Laravel
-composer require owen-it/laravel-auditing
-````
-
-Publicar a configuração e as migration para auditoria
-php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="config"
-````
-php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="migrations"
-
-Limpar cache de configuração
-php artisan config:clear
-````
+ 

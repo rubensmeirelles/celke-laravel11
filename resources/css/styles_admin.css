@@ -1,0 +1,9 @@
+.bg-nav
+{
+    background-color: #183181;
+    color: #fff;
+}
+
+.bg-nav .nav a{
+    color: #fff;
+}

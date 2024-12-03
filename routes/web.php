@@ -3,11 +3,19 @@
 use App\Http\Controllers\ClasseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Login
+Route::get('/', [LoginController::class, 'index'])->name('login.index');
+
+// Dashboard
+Route::get('/index-dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 // Cursos
 Route::get('/index-course', [CourseController:: class, 'index'])->name('courses.index');

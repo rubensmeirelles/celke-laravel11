@@ -6,7 +6,7 @@
         <h2>Cadastrar aula - curso de {{ $course->name }}</h2>
         <ol class="breadcrumb mb-3 mt-3 ms-auto">
             <li class="breadcrumb-item active">
-                <a href="" class="text-decoration-none">Dashboard</a>
+                <a href="{{ route('dashboard.index') }}" class="text-decoration-none">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <a href="{{ route('classe.index', ['course' => $course->id]) }}" class="text-decoration-none">Aulas</a>

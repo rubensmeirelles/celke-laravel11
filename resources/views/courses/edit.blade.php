@@ -37,7 +37,7 @@
               </div>
               <div class="col-12 col-md-6">
                 <label for="price" class="form-label">Preço</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Preço do curso: 0.00" value="{{ old('price', $course->price) }}">
+                <input type="text" class="form-control" id="price" name="price" placeholder="Preço do curso: 0.00" value="{{ old('price', isset($course->price) ? number_format($course->price, '2', ',', '.') : '') }}">
               </div>
 
               <div class="col-12">

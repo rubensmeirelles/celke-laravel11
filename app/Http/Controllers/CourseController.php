@@ -58,7 +58,7 @@ class CourseController extends Controller
 
         $course = Course::create([
             'name' => $request->name,
-            'price' => $request->price,
+            'price' => str_replace(',', '.', str_replace('.', '', $request->price)),
         ]);
 
         DB::commit();
@@ -94,7 +94,7 @@ class CourseController extends Controller
         try{
             $course->update([
                 'name'=>$request->name,
-                'price'=>$request->price,
+                'price'=>str_replace(',', '.', str_replace('.', '', $request->price)),
             ]);
 
             DB::commit();

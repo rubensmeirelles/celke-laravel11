@@ -11,7 +11,6 @@ use \OwenIt\Auditing\Auditable as AuditingAuditable;
 class Classe extends Model implements Auditable
 {
     use HasFactory, AuditingAuditable;
-    use HasFactory;
 
     // Indicar o nome da tabela
     protected $table = 'classes';

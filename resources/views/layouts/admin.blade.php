@@ -41,6 +41,11 @@
                             Dashboard
                         </a>
 
+                        <a class="nav-link" href="{{ route('user.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            Usuários
+                        </a>
+
                         <a class="nav-link" href="{{ route('courses.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
                             Cursos

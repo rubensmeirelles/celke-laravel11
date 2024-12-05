@@ -16,6 +16,8 @@ Route::get('/', [LoginController::class, 'index'])->name('login.index');
 Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.process');
 Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
+Route::group(['middleware' => 'auth'], function() {
+
 // Dashboard
 Route::get('/index-dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -38,7 +40,6 @@ Route::put('/update-classe/{classe}', [ClasseController::class, 'update'])->name
 Route::delete('/destroy-classe/{classe}', [ClasseController:: class, 'destroy'])->name('classe.destroy');
 
 // Usuários
-// Usuários
 Route::get('/index-user', [UserController::class, 'index'])->name('user.index');
 Route::get('/show-user/{user}', [UserController::class, 'show'])->name('user.show');
 Route::get('/create-user', [UserController::class, 'create'])->name('user.create');
@@ -48,3 +49,5 @@ Route::put('/update-user/{user}', [UserController::class, 'update'])->name('user
 Route::get('/edit-user-password/{user}', [UserController::class, 'editPassword'])->name('user.edit-password');
 Route::put('/update-user-password/{user}', [UserController::class, 'updatePassword'])->name('user.update-password');
 Route::delete('/destroy-user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+});

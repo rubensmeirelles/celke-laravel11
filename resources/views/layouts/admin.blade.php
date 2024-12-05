@@ -24,7 +24,7 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#!">Perfil</a></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Sair</a></li>
+                    <li><a class="dropdown-item" href="{{ route('login.destroy' )}}">Sair</a></li>
                 </ul>
             </li>
         </ul>
@@ -51,7 +51,7 @@
                             Cursos
                         </a>
 
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('login.destroy' )}}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
                             Sair
                         </a>
@@ -59,7 +59,11 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logado: Rubens</div>
+                    <div class="small">
+                        @if (auth()->check())
+                            {{ auth()->user()->name }}
+                        @endif
+                    </div>
                 </div>
             </nav>
         </div>

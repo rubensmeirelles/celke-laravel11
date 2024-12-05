@@ -26,4 +26,9 @@ class LoginController extends Controller
         //Redireciona para a página pruncipal
         return redirect()->route('dashboard.index');
     }
+
+    public function destroy(){
+        Auth::logout();
+        return redirect()->route('login.index')->with('success', 'Logout efetuado com sucesso!');
+    }
 }

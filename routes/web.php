@@ -7,12 +7,14 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login.index');
+Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.process');
+Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
 // Dashboard
 Route::get('/index-dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

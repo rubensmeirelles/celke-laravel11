@@ -40,7 +40,7 @@ class UserController extends Controller
 
             ]);
 
-            Log::info('Usuário nãoa cadastrado', ['id' => $user->id, $user]);
+            Log::info('Usuário cadastrado', ['id' => $user->id]);
 
             DB::commit();
 

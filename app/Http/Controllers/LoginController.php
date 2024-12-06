@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LoginUserRequest;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -25,6 +30,39 @@ class LoginController extends Controller
         }
         //Redireciona para a página pruncipal
         return redirect()->route('dashboard.index');
+    }
+
+    public function create(){
+        return view('login.create');
+    }
+
+    public function store(LoginUserRequest $request){
+        //dd($request);
+        $request->validated();
+
+        DB::beginTransaction();
+
+        try{
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
+
+            Log::info('Usuário cadastrado', ['id' => $user->id, $user]);
+
+            DB::commit();
+
+            return redirect()->route('login.index')->with('success', 'Usuário cadastrado com sucesso!');
+        }
+
+        catch(Exception $e){
+            Log::warning('Usuário não cadastrado', ['error' => $e->getMessage()]);
+
+            DB::rollBack();
+
+            return back()->withInput()->with('error', 'Usuário não cadastrado!');
+        }
     }
 
     public function destroy(){

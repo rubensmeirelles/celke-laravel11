@@ -49,7 +49,7 @@ class LoginController extends Controller
                 'password' => $request->password,
             ]);
 
-            Log::info('Usuário cadastrado', ['id' => $user->id, $user]);
+            Log::info('Usuário cadastrado', ['id' => $user->id]);
 
             DB::commit();
 

@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+use OwenIt\Auditing\Contracts\Auditable;
+use \OwenIt\Auditing\Auditable as AuditingAuditable;
+
+class User extends Authenticatable implements Auditable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, AuditingAuditable;
 
     protected $table = 'users';
 

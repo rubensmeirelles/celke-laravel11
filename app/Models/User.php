@@ -9,10 +9,11 @@ use Illuminate\Notifications\Notifiable;
 
 use OwenIt\Auditing\Contracts\Auditable;
 use \OwenIt\Auditing\Auditable as AuditingAuditable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements Auditable
 {
-    use HasFactory, Notifiable, AuditingAuditable;
+    use HasFactory, Notifiable, AuditingAuditable, HasRoles;
 
     protected $table = 'users';
 

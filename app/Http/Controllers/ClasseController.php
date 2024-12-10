@@ -15,7 +15,7 @@ class ClasseController extends Controller
         //dd($course);
         $classes = Classe::with('course')
         ->where('course_id', $course->id)
-        ->orderBy('order_classe')
+        ->orderBy('order_class')
         ->get();
 
         // Carregar a view
@@ -37,14 +37,14 @@ class ClasseController extends Controller
 
         // Recuperar a última ordem da aula do curso
         $lastOrderClasse = Classe::where('course_id', $request->course_id)
-        ->orderBy('order_classe', 'DESC')
+        ->orderBy('order_class', 'DESC')
         ->first();
 
         // Cadastrar a aula do curso
         Classe::create([
             'name' => $request->name,
             'description' => $request->description,
-            'order_classe' => $lastOrderClasse ? $lastOrderClasse->order_classe + 1 : 1,
+            'order_class' => $lastOrderClasse ? $lastOrderClasse->order_class + 1 : 1,
             'course_id' => $request->course_id
         ]);
 

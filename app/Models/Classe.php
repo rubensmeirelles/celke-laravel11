@@ -16,7 +16,7 @@ class Classe extends Model implements Auditable
     protected $table = 'classes';
 
     // Indicar quais colunas podem ser cadastrada
-    protected $fillable = ['name', 'description', 'course_id', 'order_classe'];
+    protected $fillable = ['name', 'description', 'course_id', 'order_class'];
 
     //Criar relacionamento ente um e muitos
     public function course(){

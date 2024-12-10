@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Spatie\Permission\Models\Permission;
 
 class LoginController extends Controller
 {
@@ -28,6 +29,23 @@ class LoginController extends Controller
             //Redireciona para o login novamente
             return back()->withInput()->with('error', 'E-mail ou senha inválidos!');
         }
+
+        //Obter o usuário autenticado
+        $user = Auth::user();
+        $user = User::find($user->id);
+
+        //Verifica qual é a permissão do usuário
+        if($user->hasRole('Super Admin')){
+            //Usuário possui todas as permissões
+            $permissions = Permission::pluck('name')->toArray();
+
+        } else {
+            //Recupera do bd todas as permissões do usuário
+            $permissions = $user->getPermissionsViaRoles()->pluck()->toArray();
+        }
+        //Atribui as permissões ao usuário
+        $user->syncPermissions();
+
         //Redireciona para a página pruncipal
         return redirect()->route('dashboard.index');
     }

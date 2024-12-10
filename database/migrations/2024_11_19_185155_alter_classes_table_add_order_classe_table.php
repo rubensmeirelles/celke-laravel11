@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('classes', function(Blueprint $table){
-            $table->integer('order_classe')->after('description');
+            $table->integer('order_class')->after('description');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         schema::table('classes', function(Blueprint $table){
-            $table->dropColumn('order_classe');
+            $table->dropColumn('order_class');
         });
     }
 };

@@ -41,10 +41,10 @@ class LoginController extends Controller
 
         } else {
             //Recupera do bd todas as permissões do usuário
-            $permissions = $user->getPermissionsViaRoles()->pluck()->toArray();
+            $permissions = $user->getPermissionsViaRoles()->pluck('name')->toArray();
         }
         //Atribui as permissões ao usuário
-        $user->syncPermissions();
+        $user->syncPermissions($permissions);
 
         //Redireciona para a página pruncipal
         return redirect()->route('dashboard.index');

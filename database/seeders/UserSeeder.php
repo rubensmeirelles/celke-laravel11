@@ -11,25 +11,25 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        if (!User::where('email', 'rrubens.meirelles@gmail.com')->first()) {
-            $superAdmin = User::create([
-                'name' => 'Rubens',
-                'email' => 'rrubens.meirelles@gmail.com',
-                'password' => Hash::make('123456', ['rounds' => 12])
-            ]);
-
-            //Atribuir papel para o usuário
-            $superAdmin->assignRole('Super Admin');
-        }
-
         if (!User::where('email', 'cesar@celke.com.br')->first()) {
-            $admin = User::create([
+            $superAdmin = User::create([
                 'name' => 'Cesar',
                 'email' => 'cesar@celke.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 12])
             ]);
 
             //Atribuir papel para o usuário
+            $superAdmin->assignRole('Super Admin');
+        }
+
+
+        if (!User::where('email', 'jessica@celke.com.br')->first()) {
+            $admin = User::create([
+                'name' => 'Jessica',
+                'email' => 'jessica@celke.com.br',
+                'password' => Hash::make('123456a', ['rounds' => 12])
+            ]);
+
             $admin->assignRole('Admin');
         }
 
@@ -44,16 +44,6 @@ class UserSeeder extends Seeder
             $teacher->assignRole('Professor');
         }
 
-        if (!User::where('email', 'jessica@celke.com.br')->first()) {
-            $aluno = User::create([
-                'name' => 'Jessica',
-                'email' => 'jessica@celke.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 12])
-            ]);
-
-            $aluno->assignRole('Aluno');
-        }
-
         if (!User::where('email', 'gabrielly@celke.com.br')->first()) {
             $tutor = User::create([
                 'name' => 'Gabrielly',
@@ -62,6 +52,16 @@ class UserSeeder extends Seeder
             ]);
 
             $tutor->assignRole('Tutor');
+        }
+
+        if (!User::where('email', 'marcos@celke.com.br')->first()) {
+            $student = User::create([
+                'name' => 'Marcos',
+                'email' => 'marcos@celke.com.br',
+                'password' => Hash::make('123456a', ['rounds' => 12])
+            ]);
+
+            $student->assignRole('Aluno');
         }
     }
 }

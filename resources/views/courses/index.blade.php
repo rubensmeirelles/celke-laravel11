@@ -16,7 +16,9 @@
     <div class="card mb-4 hstack gap-2">
         <span class="card-header">Listar</span>
         <span class="ms-auto">
-            <a href="{{ route('courses.create') }}" class="btn btn-success btn-sm">Cadastrar</a>
+            @can('create-course',)
+                <a href="{{ route('courses.create') }}" class="btn btn-success btn-sm">Cadastrar</a>
+            @endcan
         </span>
     </div>
 
@@ -39,16 +41,23 @@
                         <td>{{ $course->name }}</td>
                         <td>{{ 'R$ ' . number_format($course->price, 2, ',' , '.') }}</td>
                         <td class="d-md-flex flex-row justify-content-center">
-                            <a href="{{ route('courses.show', ['course' => $course->id]) }}" class="btn btn-info btn-sm me-1 mt-1 mt-md-0">Visualizar</a>
-                            <a href="{{ route('courses.edit', ['course' => $course->id]) }}" class="btn btn-primary btn-sm me-1 mt-1 mt-md-0">Editar</a>
+                            @can('show-course')
+                                <a href="{{ route('courses.show', ['course' => $course->id]) }}" class="btn btn-info btn-sm me-1 mt-1 mt-md-0">Visualizar</a>
+                            @endcan
+
+                            @can('edit-course')
+                                <a href="{{ route('courses.edit', ['course' => $course->id]) }}" class="btn btn-primary btn-sm me-1 mt-1 mt-md-0">Editar</a>
+                            @endcan
+                            
                             <a href="{{ route('classe.index', ['course' => $course->id]) }}" class="btn btn-secondary btn-sm me-1 mt-1 mt-md-0">Aulas</a>
 
-
-                            <form action="{{ route('courses.destroy', ['course' => $course->id]) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-danger btn-sm mt-1 mt-md-0" type="submit" onclick="return confirm('Coonfirma a exclusão do registro?')">Apagar</button>
-                            </form>
+                            @can('destroy-course')
+                                <form action="{{ route('courses.destroy', ['course' => $course->id]) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger btn-sm mt-1 mt-md-0" type="submit" onclick="return confirm('Coonfirma a exclusão do registro?')">Apagar</button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                     @empty

@@ -10,7 +10,9 @@
                 <a href="{{ route('dashboard.index') }}" class="text-decoration-none">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
-                <a href="{{ route('courses.index') }}" class="text-decoration-none">Cursos</a>
+                @can('index-course')
+                    <a href="{{ route('courses.index') }}" class="text-decoration-none">Cursos</a>
+                @endcan
             </li>
             <li class="breadcrumb-item">Curso</li>
         </ol>
@@ -19,8 +21,12 @@
     <div class="card mb-4 hstack gap-2">
         <span class="card-header">Editar</span>
         <span class="ms-auto">
-            <a href="{{ route('courses.index') }}" class="btn btn-secondary btn-sm">Listar</a>
-            <a href="{{ route('courses.show', ['course' => $course->id]) }}" class="btn btn-info btn-sm">Visualizar</a>
+            @can('index-course')
+                <a href="{{ route('courses.index') }}" class="btn btn-secondary btn-sm">Listar</a>
+            @endcan
+            @can('show-course', $post)
+                <a href="{{ route('courses.show', ['course' => $course->id]) }}" class="btn btn-info btn-sm">Visualizar</a>
+            @endcan
         </span>
     </div>
 

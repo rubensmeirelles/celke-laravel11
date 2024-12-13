@@ -59,12 +59,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/destroy-course/{course}', [CourseController:: class, 'destroy'])->name('courses.destroy')->middleware('permission:destroy-course');
 
     // Aulas
-    Route::get('/index-classe/{course}', [ClasseController::class, 'index'])->name('classe.index');
-    Route::get('/show-classe/{classe}', [ClasseController::class, 'show'])->name('classe.show');
-    Route::get('/create-classe/{course}', [ClasseController::class, 'create'])->name('classe.create');
-    Route::post('/store-classe', [ClasseController::class, 'store'])->name('classe.store');
-    Route::get('/edit-classe/{classe}', [ClasseController::class, 'edit'])->name('classe.edit');
-    Route::put('/update-classe/{classe}', [ClasseController::class, 'update'])->name('classe.update');
-    Route::delete('/destroy-classe/{classe}', [ClasseController:: class, 'destroy'])->name('classe.destroy');
+    Route::get('/index-classe/{course}', [ClasseController::class, 'index'])->name('classe.index')->middleware('permission:index-classe');
+    Route::get('/show-classe/{classe}', [ClasseController::class, 'show'])->name('classe.show')->middleware('permission:show-classe');
+    Route::get('/create-classe/{course}', [ClasseController::class, 'create'])->name('classe.create')->middleware('permission:create-classe');
+    Route::post('/store-classe', [ClasseController::class, 'store'])->name('classe.store')->middleware('permission:create-classe');
+    Route::get('/edit-classe/{classe}', [ClasseController::class, 'edit'])->name('classe.edit')->middleware('permission:edit-classe');
+    Route::put('/update-classe/{classe}', [ClasseController::class, 'update'])->name('classe.update')->middleware('permission:update-classe');
+    Route::delete('/destroy-classe/{classe}', [ClasseController:: class, 'destroy'])->name('classe.destroy')->middleware('permission:destroy-classe');
 
 });

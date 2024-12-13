@@ -67,6 +67,9 @@ class LoginController extends Controller
                 'password' => $request->password,
             ]);
 
+            //Definir o perfil do usuário
+            $user->assignRole("Aluno");
+
             Log::info('Usuário cadastrado', ['id' => $user->id]);
 
             DB::commit();

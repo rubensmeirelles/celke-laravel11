@@ -6,8 +6,10 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -19,7 +21,9 @@ class UserController extends Controller
     }
 
     public function create(){
-        return view('users.create');
+        //Recuperar os perfis
+        $roles = Role::pluck('name')->all();
+        return view('users.create', ['roles' => $roles]);
     }
 
     public function show(User $user){
@@ -40,6 +44,9 @@ class UserController extends Controller
 
             ]);
 
+            //Cadastrar o perfil do usuário
+            $user->assignRole($request->roles);
+
             Log::info('Usuário cadastrado', ['id' => $user->id]);
 
             DB::commit();
@@ -57,15 +64,18 @@ class UserController extends Controller
     }
     public function edit(User $user)
     {
+        $roles = Role::pluck('name')->all();
+
+        //Recuperar o perfil do usuário
+        $userRoles = $user->roles->pluck('name')->first();
 
         // Carregar a VIEW
-        return view('users.edit', ['menu' => 'users', 'user' => $user]);
+        return view('users.edit', ['menu' => 'users', 'user' => $user, 'roles' => $roles, 'userRoles' => $userRoles]);
     }
 
     // Editar no banco de dados o usuário
     public function update(UserRequest $request, User $user)
     {
-
         // Validar o formulário
         $request->validated();
 
@@ -79,6 +89,9 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
+
+            //Editar o perfil do usuário
+            $user->syncRoles($request->roles);
 
             // Salvar log
             Log::info('Usuário editado.', ['id' => $user->id]);
@@ -159,8 +172,11 @@ class UserController extends Controller
             // Excluir o registro do banco de dados
             $user->delete();
 
+            //Remove todos os perfis atribuídos ao usuário
+            $user->syncRoles([]);
+
             // Salvar log
-            Log::info('Usuário excluído.', ['id' => $user->id]);
+            Log::info('Usuário excluído.', ['id' => $user->id, 'action_usr_id' => Auth::id()]);
 
             // Redirecionar o usuário, enviar a mensagem de sucesso
             return redirect()->route('user.index')->with('success', 'Usuário excluído com sucesso!');

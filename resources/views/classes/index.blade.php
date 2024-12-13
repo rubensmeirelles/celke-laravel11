@@ -16,8 +16,11 @@
 
     <div class="card mb-4 hstack gap-2">
         <span class="card-header">Listar</span>
+
         <span class="ms-auto">
-            <a href="{{ route('classe.create', ['course' => $course->id]) }}" class="btn btn-success btn-sm">Cadastrar</a>
+            @can('create-classe')
+                <a href="{{ route('classe.create', ['course' => $course->id]) }}" class="btn btn-success btn-sm">Cadastrar</a>
+            @endcan
         </span>
     </div>
 

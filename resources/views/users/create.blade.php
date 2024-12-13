@@ -44,6 +44,23 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Senha de acesso. Mínimo 6 caracteres" value="{{ old('password') }}">
                 </div>
 
+                <div class="col-12 col-md-6">
+                    <label for="roles" class="form-label">Perfil</label>
+                    <select class="form-select" name="roles" id="roles">
+                        <option value="">Selecione...</option>
+                        <@forelse ($roles as $role)
+                            @if ($role != 'Super Admin')
+                                <option {{ old('roles') == $role ? 'selected' : '' }} value="{{ $role }}">{{ $role }}</option>
+                                @else
+                                    @if (Auth::user()->hasRole('Super Admin'))
+                                        <option {{ old('roles') == $role ? 'selected' : '' }} value="{{ $role }}">{{ $role }}</option>
+                                    @endif
+                            @endif
+                            @empty
+                        @endforelse
+                    </select>
+                </div>
+
                 <div class="col-12">
                     <button type="submit" class="btn btn-success btn-sm">Cadastrar</button>
                 </div>

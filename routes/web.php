@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 // Route::get('/', function () {
@@ -66,5 +67,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/edit-classe/{classe}', [ClasseController::class, 'edit'])->name('classe.edit')->middleware('permission:edit-classe');
     Route::put('/update-classe/{classe}', [ClasseController::class, 'update'])->name('classe.update')->middleware('permission:update-classe');
     Route::delete('/destroy-classe/{classe}', [ClasseController:: class, 'destroy'])->name('classe.destroy')->middleware('permission:destroy-classe');
+
+    // Perfis
+    Route::get('/index-role', [RoleController:: class, 'index'])->name('role.index')->middleware('permission:index-role');
+    Route::get('/show-role/{role}', [RoleController:: class, 'show'])->name('role.show')->middleware('permission:show-role');
+    Route::get('/edit-role/{role}', [RoleController:: class, 'edit'])->name('role.edit')->middleware('permission:edit-role');
+    Route::put('/update-role/{role}', [RoleController::class, 'update'])->name('role.update')->middleware('permission:update-role');
+    Route::get('/create-role', [RoleController:: class, 'create'])->name('role.create')->middleware('permission:create-role');
+    Route::post('/store-role', [RoleController:: class, 'store'])->name('role.store')->middleware('permission:create-role');
+    Route::delete('/destroy-role/{role}', [RoleController:: class, 'destroy'])->name('role.destroy')->middleware('permission:destroy-role');
 
 });

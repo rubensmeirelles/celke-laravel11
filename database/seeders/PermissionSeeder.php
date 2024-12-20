@@ -21,7 +21,15 @@ class PermissionSeeder extends Seeder
             'show-classe',
             'create-classe',
             'edit-classe',
-            'destroy-classe'
+            'destroy-classe',
+
+            'index-role',
+            'show-role',
+            'edit-role',
+            'update-role',
+
+            'index-role'
+
         ];
 
 

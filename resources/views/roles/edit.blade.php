@@ -4,28 +4,28 @@
 <div class="container-fluid px-4">
 
     <div class="mb-1 hstack gap-2">
-        <h2 class="mt-3">Curso</h2>
+        <h2 class="mt-3">Perfil</h2>
         <ol class="breadcrumb mb-3 mt-3 ms-auto">
             <li class="breadcrumb-item active">
                 <a href="{{ route('dashboard.index') }}" class="text-decoration-none">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 @can('index-course')
-                    <a href="{{ route('courses.index') }}" class="text-decoration-none">Cursos</a>
+                    <a href="{{ route('role.index') }}" class="text-decoration-none">Perfis</a>
                 @endcan
             </li>
-            <li class="breadcrumb-item">Curso</li>
+            <li class="breadcrumb-item">Perfil</li>
         </ol>
     </div>
 
     <div class="card mb-4 hstack gap-2">
         <span class="card-header">Editar</span>
         <span class="ms-auto">
-            @can('index-course')
-                <a href="{{ route('courses.index') }}" class="btn btn-secondary btn-sm">Listar</a>
+            @can('index-role')
+                <a href="{{ route('role.index') }}" class="btn btn-secondary btn-sm">Listar</a>
             @endcan
-            @can('show-course')
-                <a href="{{ route('courses.show', ['course' => $course->id]) }}" class="btn btn-info btn-sm">Visualizar</a>
+            @can('show-role')
+                <a href="{{ route('role.show', ['role' => $role->id]) }}" class="btn btn-info btn-sm">Visualizar</a>
             @endcan
         </span>
     </div>
@@ -33,17 +33,13 @@
     <div class="card-body">
         <x-alert />
 
-        <form class="row g-3" action="{{ route('courses.update', ['course' => $course->id]) }}" method="POST">
+        <form class="row g-3" action="{{ route('role.update', ['role' => $role->id]) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="col-12 col-md-6">
                 <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Nome do curso" value="{{ old('name', $course->name) }}">
-              </div>
-              <div class="col-12 col-md-6">
-                <label for="price" class="form-label">Preço</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Preço do curso: 0.00" value="{{ old('price', isset($course->price) ? number_format($course->price, '2', ',', '.') : '') }}">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Nome do perfil" value="{{ old('name', $role->name) }}">
               </div>
 
               <div class="col-12">

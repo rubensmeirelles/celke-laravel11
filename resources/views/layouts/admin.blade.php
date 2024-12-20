@@ -53,6 +53,13 @@
                             </a>
                         @endcan
 
+                        @can('index-role')
+                            <a class="nav-link" href="{{ route('role.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
+                                Perfis
+                            </a>
+                        @endcan
+
                         <a class="nav-link" href="{{ route('login.destroy' )}}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
                             Sair

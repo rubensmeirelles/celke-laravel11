@@ -47,9 +47,9 @@
                                 <a href="{{ route('role.edit', ['role' => $role->id]) }}" class="btn btn-primary btn-sm me-1 mt-1 mt-md-0">Editar</a>
                             @endcan
 
-                            {{-- @can('update') --}}
+                            @can('index-role-permission')
                                 <a href="{{ route('role-permission.index', ['role' => $role->id]) }}" class="btn btn-secondary btn-sm me-1 mt-1 mt-md-0">Permissões</a>
-                            {{-- @endcan --}}
+                            @endcan
 
                             @can('destroy-role')
                                 <form action="{{ route('role.destroy', ['role' => $role->id]) }}" method="POST">

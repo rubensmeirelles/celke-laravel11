@@ -11,36 +11,36 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'index-course',
-            'show-course',
-            'create-course',
-            'edit-course',
-            'destroy-course',
+            ['title' => 'Listar cursos', 'name' => 'index-course'],
+            ['title' => 'Visualizar curso', 'name' => 'show-course'],
+            ['title' => 'Cadastrar curso', 'name' => 'create-course'],
+            ['title' => 'Editar curso', 'name' => 'edit-course'],
+            ['title' => 'Excluir curso', 'name' => 'destroy-course'],
 
-            'index-classe',
-            'show-classe',
-            'create-classe',
-            'edit-classe',
-            'destroy-classe',
+            ['title' => 'Listar aulas', 'name' => 'index-classe'],
+            ['title' => 'Visualizar aula', 'name' => 'show-classe'],
+            ['title' => 'Cadastrar aula', 'name' => 'create-classe'],
+            ['title' => 'Editar aula', 'name' => 'edit-classe'],
+            ['title' => 'Excluir aula', 'name' => 'destroy-classe'],
 
-            'index-role',
-            'show-role',
-            'edit-role',
-            'destroy-role',
+            ['title' => 'Listar perfis', 'name' => 'index-role'],
+            ['title' => 'Visualizar perfil', 'name' => 'show-role'],
+            ['title' => 'Editar perfil', 'name' => 'edit-role'],
+            ['title' => 'Excluir perfil', 'name' => 'destroy-role'],
 
-            'index-role',
-            'index-role-permission'
+            ['title' => 'Listar permissões do perfil', 'name' => 'index-role-permission'],
 
         ];
 
 
 
         foreach($permissions as $permission){
-            $existingPermission = Permission::where('name', $permission)->first();
+            $existingPermission = Permission::where('name', $permission['name'])->first();
 
             if(!$existingPermission){
                 Permission::create([
-                    'name' => $permission,
+                    'title' => $permission['title'],
+                    'name' => $permission['name'],
                     'guard_name' => 'web'
                 ]);
             }

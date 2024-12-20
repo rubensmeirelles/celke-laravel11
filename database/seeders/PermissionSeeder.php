@@ -26,9 +26,10 @@ class PermissionSeeder extends Seeder
             'index-role',
             'show-role',
             'edit-role',
-            'update-role',
+            'destroy-role',
 
-            'index-role'
+            'index-role',
+            'index-role-permission'
 
         ];
 

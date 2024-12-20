@@ -42,7 +42,9 @@ class RoleSeeder extends Seeder
             'index-role',
             'show-role',
             'edit-role',
-            'update-role'
+            'destroy-role',
+
+            'index-role-permission'
         ]);
 
         if(!Role::where('name', 'Professor')->first()){
@@ -65,7 +67,9 @@ class RoleSeeder extends Seeder
             'show-classe',
             'create-classe',
             'edit-classe',
-            'destroy-classe'
+            'destroy-classe',
+
+            'index-role'
         ]);
 
         if(!Role::where('name', 'Tutor')->first()){

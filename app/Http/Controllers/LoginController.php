@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
@@ -89,5 +90,11 @@ class LoginController extends Controller
     public function destroy(){
         Auth::logout();
         return redirect()->route('login.index')->with('success', 'Logout efetuado com sucesso!');
+    }
+
+    public function roles(){
+        $roles = Role::orderBy('name');
+        
+        return view('roles.index', ['roles' => $roles]);
     }
 }

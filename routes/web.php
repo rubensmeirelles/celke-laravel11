@@ -8,6 +8,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 
 // Route::get('/', function () {
@@ -76,5 +77,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/create-role', [RoleController:: class, 'create'])->name('role.create')->middleware('permission:create-role');
     Route::post('/store-role', [RoleController:: class, 'store'])->name('role.store')->middleware('permission:create-role');
     Route::delete('/destroy-role/{role}', [RoleController:: class, 'destroy'])->name('role.destroy')->middleware('permission:destroy-role');
+
+    // Permissão dos Perfis
+    Route::get('/index-role-premission/{role}', [RolePermissionController:: class, 'index'])->name('role-permission.index')->middleware('permission:index-role-permission');
 
 });

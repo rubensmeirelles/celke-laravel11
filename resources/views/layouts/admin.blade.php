@@ -70,7 +70,7 @@
                 <div class="sb-sidenav-footer">
                     <div class="small">
                         @if (auth()->check())
-                            {{ auth()->user()->name }}
+                            Logado: {{ auth()->user()->name }}
                         @endif
                     </div>
                 </div>

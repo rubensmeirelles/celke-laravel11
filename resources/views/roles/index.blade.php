@@ -48,7 +48,7 @@
                             @endcan
 
                             {{-- @can('update') --}}
-                                <a href="{{ route('classe.index', ['course' => $role->id]) }}" class="btn btn-secondary btn-sm me-1 mt-1 mt-md-0">Permissões</a>
+                                <a href="{{ route('role-permission.index', ['role' => $role->id]) }}" class="btn btn-secondary btn-sm me-1 mt-1 mt-md-0">Permissões</a>
                             {{-- @endcan --}}
 
                             @can('destroy-role')

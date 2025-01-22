@@ -45,9 +45,22 @@
                     <td>{{ $permission->title }}</td>
                     <td>
                         @if (in_array($permission->id, $rolePermissions ?? []))
-                            <span class="badge text-bg-success">Liberado</span>
-                            @else
-                            <span class="badge text-bg-danger">Bloqueado</span>
+                            @can('update-role-permission')
+                            <a href="{{ route('role-permission.update', ['role', $role->id, 'permission' => $permission->id]) }}">
+                                <span class="badge text-bg-success">Liberado</span>
+                            </a>
+
+                                @else
+                                <span class="badge text-bg-success">Liberado</span>
+                            @endcan
+                        @else
+                            @can('update-role-permission')
+                            <a href="{{ route('role-permission.update', ['role', $role->id, 'permission' => $permission->id]) }}">
+                                <span class="badge text-bg-danger">Bloqueado</span>
+                            </a>
+                                @else<span class="badge text-bg-danger">Bloqueado</span>
+                            @endcan
+
                         @endif
                     </td>
                 </tr>

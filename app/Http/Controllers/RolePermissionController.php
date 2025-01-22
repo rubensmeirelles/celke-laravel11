@@ -38,4 +38,30 @@ class RolePermissionController extends Controller
 
         //dd($permission);
     }
+
+    public function update(Request $request, Role $role){
+        $permission = Permission::find($request->permission);
+
+        if(!$permission){
+            Log::info('Permissão não encontrada.', ['role' => $role->id, 'permission' => $request->permission, 'action_user_id' => Auth::id()]);
+
+            return redirect()->route('role-permission.update', ['role' => $role->id, 'permission' => $request->permission])->with('error', 'Permissão não encontrada.');
+
+        }
+
+        if($role->permissions->contains($permission)){
+            $role->revokePermissionTo($permission);
+
+            Log::info('Bloquear permissão para o perfil.', ['role' => $role->id, 'permission' => $request->permission, 'action_user_id' => Auth::id()]);
+
+            return redirect()->route('role-permission.index', ['role' => $role->id, 'permission' => $request->permission])->with('error', 'Permissão bloqueada com sucesso.');
+
+            }else{
+                $role->givePermissionTo($permission);
+
+                Log::info('Liberar permissão para o perfil.', ['role' => $role->id, 'permission' => $request->permission, 'action_user_id' => Auth::id()]);
+
+                return redirect()->route('role-permission.index', ['role' => $role->id, 'permission' => $request->permission])->with('error', 'Permissão liberada com sucesso.');
+            }
+        }
 }

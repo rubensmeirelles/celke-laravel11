@@ -44,8 +44,13 @@ class RoleSeeder extends Seeder
             'edit-role',
             'destroy-role',
 
-            'index-role-permission'
+            'index-role-permission',
+            'update-role-permission',
         ]);
+
+        // $admin->revokePermissionTo([
+        //     'update-role-permission'
+        // ]);
 
         if(!Role::where('name', 'Professor')->first()){
             $teacher = Role::create([

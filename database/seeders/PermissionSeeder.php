@@ -29,6 +29,7 @@ class PermissionSeeder extends Seeder
             ['title' => 'Excluir perfil', 'name' => 'destroy-role'],
 
             ['title' => 'Listar permissões do perfil', 'name' => 'index-role-permission'],
+            ['title' => 'Editar permissão do perfil', 'name' => 'update-role-permission'],
 
         ];
 

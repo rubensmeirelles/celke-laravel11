@@ -15,6 +15,47 @@
         </ol>
     </div>
 
+    <div class="card mb-4 border-light shadow">
+        <div class="card-header">
+            <span>Pesquisar</span>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('user.index') }}">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $name }}">
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="text" name="email" id="email" class="form-control" value="{{ $email }}">
+                    </div>
+
+
+                </div>
+                <div class="row mt-4">
+
+                    <div class="col-md-4 col-sm-12">
+                        <label for="start_date_registration" class="form-label">Data cadastro inicial</label>
+                        <input type="datetime-local" name="start_date_registration" id="start_date_registration" class="form-control" value="{{ $start_date_registration }}">
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                        <label for="end_date_registration" class="form-label">Data cadastro final</label>
+                        <input type="datetime-local" name="end_date_registration" id="end_date_registration" class="form-control" value="{{ $end_date_registration }}">
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 mt-4 pt-3">
+                        <button type="submit" class="btn btn-info btn-sm">Pesquisar</button>
+
+                        <a href="{{ route('user.index') }}" class="btn btn-warning btn-sm">Limpar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="card mb-4 hstack gap-2">
         <span class="card-header">Listar</span>
         <span class="ms-auto">
@@ -58,7 +99,7 @@
                 @endforelse
             </tbody>
         </table>
-        {{-- {{ $user->links() }} --}}
+        {{ $users->onEachSide(0)->links() }}
     </div>
 </div>
 

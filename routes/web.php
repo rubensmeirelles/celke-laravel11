@@ -80,5 +80,6 @@ Route::group(['middleware' => 'auth'], function() {
 
     // Permissão dos Perfis
     Route::get('/index-role-premission/{role}', [RolePermissionController:: class, 'index'])->name('role-permission.index')->middleware('permission:index-role-permission');
+    Route::get('/update-role-premission/{role}/{permission}', [RolePermissionController:: class, 'update'])->name('role-permission.update')->middleware('permission:update-role-permission');
 
 });

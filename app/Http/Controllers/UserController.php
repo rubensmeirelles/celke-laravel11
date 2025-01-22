@@ -13,11 +13,36 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        $users = User::orderBy('created_at')->paginate(10);
+        //$users = User::orderBy('created_at')->paginate(10);
 
-        return view('users.index', ['users' => $users]);
+        $users = User::when($request->has('name'), function ($whenQuery) use ($request){
+            $whenQuery->where('name', 'like', '%' . $request->name . '%');
+        })
+
+        ->when($request->has('email'), function ($whenQuery) use ($request){
+            $whenQuery->where('email', 'like', '%' . $request->email . '%');
+        })
+        ->when($request->filled('start_date_registration'), function ($whenQuery) use ($request){
+            $whenQuery->where('created_at', '>=', \Carbon\Carbon::parse
+            ($request->start_date_registration)->format('Y-m-d H:i:s'));
+        })
+        ->when($request->filled('end_date_registration'), function ($whenQuery) use ($request){
+            $whenQuery->where('created_at', '<=', \Carbon\Carbon::parse
+            ($request->end_date_registration)->format('Y-m-d H:i:s'));
+        })
+        ->orderBy('created_at')
+        ->paginate(10)
+        ->withQueryString();
+
+        return view('users.index', [
+            'users' => $users,
+            'name' => $request->name,
+            'email' => $request->email,
+            'start_date_registration' => $request->start_date_registration,
+            'end_date_registration' => $request->end_date_registration,
+        ]);
     }
 
     public function create(){

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -257,5 +258,74 @@ class UserController extends Controller
 
         //Fazer o download
         return $pdf->download('list_users.pdf');
+    }
+
+    public function generateCsv(Request $request) {
+
+        $users = User::when($request->has('name'), function ($whenQuery) use ($request){
+            $whenQuery->where('name', 'like', '%' . $request->name . '%');
+        })
+
+        ->when($request->has('email'), function ($whenQuery) use ($request){
+            $whenQuery->where('email', 'like', '%' . $request->email . '%');
+        })
+        ->when($request->filled('start_date_registration'), function ($whenQuery) use ($request){
+            $whenQuery->where('created_at', '>=', \Carbon\Carbon::parse
+            ($request->start_date_registration)->format('Y-m-d H:i:s'));
+        })
+        ->when($request->filled('end_date_registration'), function ($whenQuery) use ($request){
+            $whenQuery->where('created_at', '<=', \Carbon\Carbon::parse
+            ($request->end_date_registration)->format('Y-m-d H:i:s'));
+        })
+        ->orderBy('created_at')
+        ->get();
+
+        //Somar o total de registros
+        $totalRecords = $users->count('id');
+
+        //Verifica se a quantida e registros ultrapassa o limite para gerar PDF
+        $numberRecordAllowed = 500;
+
+        if($totalRecords > $numberRecordAllowed){
+            return redirect()->route('user.index', [
+                'name' => $request->name,
+                'email' => $request->email,
+                'start_date_registration' => $request->start_date_registration,
+                'end_date_registration' => $request->end_date_registration,
+            ])->with('error', "Limite de registros ultrapassado para gerar o PDF. O limite é de $numberRecordAllowed registros!");
+        }
+
+        //Criar o csv
+        $csvFileName = tempnam(sys_get_temp_dir(), 'csv_' .Str::ulid());
+
+        //Abrir o arquivo para escrita
+        $openFile = fopen($csvFileName, 'w');
+
+        //Criar o cabeçalho
+        $header = ['id', 'Nome', 'E-mail', 'Data de cadastro'];
+
+        //Escrever o cabeçalho no arquivo
+        fputcsv($openFile, $header, ';');
+
+        //Ler os registros recuperados do banco
+        foreach($users as $user){
+            $userArraay = [
+                'id' => $user->id,
+                'name' => mb_convert_encoding($user->name, 'ISO-8859-1', 'UTF-8'),
+                'email' => $user->email,
+                'created_at' => \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s'),
+            ];
+
+            //Escrever no arquivo
+            fputcsv($openFile, $userArraay, ';');
+        }
+
+        //Fechar o arquivo
+        fclose($openFile);
+
+        //Realizar o download
+        $dateDownload = \Carbon\Carbon::parse(now())->format('dmY');
+        return response()->download($csvFileName, 'list_users_' . $dateDownload . '.csv');
+
     }
 }

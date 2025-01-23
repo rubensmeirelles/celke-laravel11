@@ -65,10 +65,13 @@
                 <a href="{{ route('user.create') }}" class="btn btn-success btn-sm">Cadastrar</a>
 
                 {{-- <a href="{{ route('user.generatePdf') }}" class="btn btn-warning btn-sm"><i --}}
-                        {{-- class="fa-regular fa-file-pdf"></i>Gerar PDF</a> --}}
+                {{-- class="fa-regular fa-file-pdf"></i>Gerar PDF</a> --}}
 
                 <a href="{{ url('generate-pdf-user?' . request()->getQueryString()) }}" class="btn btn-warning btn-sm"><i
                         class="fa-regular fa-file-pdf"></i>Gerar PDF</a>
+
+                <a href="{{ url('generate-csv-user?' . request()->getQueryString()) }}" class="btn btn-success btn-sm"><i
+                        class="fa-regular fa-file-excel"></i>Gerar CSV</a>
             </span>
         </div>
 

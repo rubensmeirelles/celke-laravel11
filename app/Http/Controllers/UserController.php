@@ -216,8 +216,41 @@ class UserController extends Controller
         }
     }
 
-    public function generatePdf(){
-        $users = User::orderByDesc('id')->get();
+    public function generatePdf(Request $request){
+        //$users = User::orderByDesc('id')->get();
+
+        $users = User::when($request->has('name'), function ($whenQuery) use ($request){
+            $whenQuery->where('name', 'like', '%' . $request->name . '%');
+        })
+
+        ->when($request->has('email'), function ($whenQuery) use ($request){
+            $whenQuery->where('email', 'like', '%' . $request->email . '%');
+        })
+        ->when($request->filled('start_date_registration'), function ($whenQuery) use ($request){
+            $whenQuery->where('created_at', '>=', \Carbon\Carbon::parse
+            ($request->start_date_registration)->format('Y-m-d H:i:s'));
+        })
+        ->when($request->filled('end_date_registration'), function ($whenQuery) use ($request){
+            $whenQuery->where('created_at', '<=', \Carbon\Carbon::parse
+            ($request->end_date_registration)->format('Y-m-d H:i:s'));
+        })
+        ->orderBy('created_at')
+        ->get();
+
+        //Somar o total de registros
+        $totalRecords = $users->count('id');
+
+        //Verifica se a quantida e registros ultrapassa o limite para gerar PDF
+        $numberRecordAllowed = 500;
+
+        if($totalRecords > $numberRecordAllowed){
+            return redirect()->route('user.index', [
+                'name' => $request->name,
+                'email' => $request->email,
+                'start_date_registration' => $request->start_date_registration,
+                'end_date_registration' => $request->end_date_registration,
+            ])->with('error', "Limite de registros ultrapassado para gerar o PDF. O limite é de $numberRecordAllowed registros!");
+        }
 
         //Carregar a string com o HTML/conteúdo e determinar a orientação e o tamanho do arquivo
         $pdf = PDF::loadView('users.generatePdf', ['users' => $users])->setPaper('a4', 'portrait');

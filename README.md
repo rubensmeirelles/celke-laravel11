@@ -173,6 +173,8 @@ Instalar a biblioteca de ícones
 npm i --save @fortawesome/fontawesome-free
 ```
 
+Instalar a biblioteca para gerar PDF
+```composer require barryvdh/laravel-dompdf
 
 ## Como usar o GitHub
 Baixar os arquivos do Git

@@ -60,6 +60,8 @@
         <span class="card-header">Listar</span>
         <span class="ms-auto">
             <a href="{{ route('user.create') }}" class="btn btn-success btn-sm">Cadastrar</a>
+
+            <a href="{{ route('user.generatePdf') }}" class="btn btn-warning btn-sm"><i class="fa-regular fa-file-pdf"></i>Gerar PDF</a>
         </span>
     </div>
 
